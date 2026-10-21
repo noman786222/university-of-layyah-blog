@@ -1,0 +1,591 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University of Layyah Blog</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f8fc;
+    color: #183653;
+}
+
+/* Navigation */
+nav {
+    background: #176b3a;
+    color: white;
+    padding: 12px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    background: white;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.logo h2 {
+    font-size: 21px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 8px;
+    display: inline-block;
+}
+
+.menu a:hover {
+    color: #ffd45c;
+}
+
+/* Hero */
+.hero {
+    min-height: 240px;
+    background:
+        linear-gradient(90deg, rgba(0,30,25,.9), rgba(0,0,0,.25)),
+        url("campus.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 35px 8%;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+/* Main layout */
+.container {
+    width: 84%;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    color: #176b3a;
+    font-size: 27px;
+}
+
+/* Blog posts */
+.post {
+    display: flex;
+    gap: 18px;
+    background: white;
+    padding: 15px;
+    margin-bottom: 18px;
+    border: 1px solid #e1e9e3;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px #00000008;
+}
+
+.post img {
+    width: 220px;
+    min-width: 220px;
+    height: 165px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.post-content {
+    flex: 1;
+}
+
+.category {
+    display: inline-block;
+    background: #dff2e5;
+    color: #176b3a;
+    padding: 4px 9px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.post h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+    color: #183653;
+}
+
+.meta {
+    color: #75849a;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.post p {
+    color: #56677b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.read-more {
+    background: #176b3a;
+    color: white;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.read-more:hover {
+    background: #104d29;
+}
+
+/* Sidebar */
+.sidebar section {
+    background: white;
+    padding: 18px;
+    border: 1px solid #e1e9e3;
+    border-radius: 7px;
+    margin-bottom: 15px;
+}
+
+.sidebar h3 {
+    color: #176b3a;
+    margin-bottom: 14px;
+}
+
+.search-box {
+    display: flex;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #ccd8ce;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-box button {
+    background: #176b3a;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+.category-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 9px 0;
+    border: none;
+    background: transparent;
+    color: #183653;
+    cursor: pointer;
+    border-bottom: 1px solid #edf0ed;
+}
+
+.category-link:hover {
+    color: #176b3a;
+}
+
+.recent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0;
+    font-size: 13px;
+}
+
+.recent img {
+    width: 65px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Load more */
+.load-more {
+    display: block;
+    margin: 15px auto;
+    background: #176b3a;
+    color: white;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#noResults {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background: #123d29;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    line-height: 1.8;
+    margin-top: 25px;
+}
+
+/* Dark mode */
+body.dark {
+    background: #17221c;
+    color: #edf5ee;
+}
+
+body.dark .post,
+body.dark .sidebar section {
+    background: #24352a;
+    border-color: #405545;
+}
+
+body.dark .post h3,
+body.dark .category-link {
+    color: #edf5ee;
+}
+
+body.dark .post p {
+    color: #c8d8cb;
+}
+
+body.dark .section-title,
+body.dark .sidebar h3 {
+    color: #a9e2b8;
+}
+
+/* Responsive design */
+@media (max-width: 850px) {
+    .container {
+        width: 92%;
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+}
+
+@media (max-width: 550px) {
+    nav {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .logo h2 {
+        font-size: 17px;
+    }
+
+    .post {
+        flex-direction: column;
+    }
+
+    .post img {
+        width: 100%;
+        min-width: 0;
+        height: 200px;
+    }
+
+    .hero {
+        min-height: 220px;
+        padding: 25px 5%;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="logo">
+        <img src="../../html/images.jpg"
+             alt="University Logo">
+        <h2>University of Layyah</h2>
+    </div>
+
+    <div class="menu">
+        <a href="#">Home</a>
+        <a href="#about">About UOL</a>
+        <a href="#posts">Blog</a>
+        <a href="#categories">Categories</a>
+        <a href="#contact">Contact</a>
+        <a href="#" id="themeBtn">🌙</a>
+    </div>
+</nav>
+
+<!-- Hero section -->
+<section class="hero" id="about">
+    <div>
+        <h1>University of Layyah Blog</h1>
+        <p>
+            Stay updated with the latest university news,<br>
+            academic insights, student stories and events.
+        </p>
+    </div>
+</section>
+
+<!-- Blog content -->
+<main class="container">
+
+    <section id="posts">
+        <h2 class="section-title">Latest Posts</h2>
+
+        <div id="postList">
+
+            <article class="post" data-category="News">
+                <img src="campus.jpg" alt="University campus">
+
+                <div class="post-content">
+                    <span class="category">News</span>
+                    <h3>University of Layyah Admissions</h3>
+                    <div class="meta">May 10, 2026 | Admin</div>
+                    <p>
+                        Read the latest university announcements,
+                        admissions updates and important information
+                        for students at the University of Layyah.
+                    </p>
+                    <button class="read-more"
+                        data-title="University of Layyah Admissions"
+                        data-text="Check the official university announcements for verified admission dates, eligibility requirements and application procedures.">
+                        Read More →
+                    </button>
+                </div>
+            </article>
+
+            <article class="post" data-category="Student Life">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80"
+                     alt="Students studying">
+
+                <div class="post-content">
+                    <span class="category">Student Life</span>
+                    <h3>A Glimpse into Student Life at UOL</h3>
+                    <div class="meta">May 5, 2026 | Admin</div>
+                    <p>
+                        Discover student activities, campus experiences,
+                        societies and opportunities that make university
+                        life exciting and memorable.
+                    </p>
+                    <button class="read-more"
+                        data-title="Student Life at UOL"
+                        data-text="University life includes learning, collaboration, student activities and personal development. Add your campus stories here.">
+                        Read More →
+                    </button>
+                </div>
+            </article>
+
+            <article class="post" data-category="Academic">
+                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=700&q=80"
+                     alt="Books and study materials">
+
+                <div class="post-content">
+                    <span class="category">Academic</span>
+                    <h3>Research and Innovation at UOL</h3>
+                    <div class="meta">April 28, 2026 | Admin</div>
+                    <p>
+                        Explore academic achievements, research ideas
+                        and educational developments that support
+                        learning and innovation.
+                    </p>
+                    <button class="read-more"
+                        data-title="Research and Innovation at UOL"
+                        data-text="Share verified research news, faculty achievements and student projects to highlight academic progress.">
+                        Read More →
+                    </button>
+                </div>
+            </article>
+
+            <article class="post" data-category="Events" hidden>
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=700&q=80"
+                     alt="University event">
+
+                <div class="post-content">
+                    <span class="category">Events</span>
+                    <h3>University Events and Activities</h3>
+                    <div class="meta">April 20, 2026 | Admin</div>
+                    <p>
+                        Find out about seminars, workshops, student
+                        competitions and university events.
+                    </p>
+                    <button class="read-more"
+                        data-title="University Events and Activities"
+                        data-text="Publish event schedules, venue details and participation information here.">
+                        Read More →
+                    </button>
+                </div>
+            </article>
+
+        </div>
+
+        <p id="noResults" hidden>No posts found.</p>
+        <button class="load-more" id="loadMore">
+            Load More Posts
+        </button>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <section>
+            <h3>Search Blog</h3>
+            <form class="search-box" id="searchForm">
+                <input type="search" id="searchInput"
+                       placeholder="Search articles...">
+                <button type="submit">⌕</button>
+            </form>
+        </section>
+
+        <section id="categories">
+            <h3>Categories</h3>
+            <button class="category-link" data-filter="all">
+                📁 All Posts
+            </button>
+            <button class="category-link" data-filter="News">
+                📁 News
+            </button>
+            <button class="category-link" data-filter="Academic">
+                📁 Academic
+            </button>
+            <button class="category-link" data-filter="Student Life">
+                📁 Student Life
+            </button>
+            <button class="category-link" data-filter="Events">
+                📁 Events
+            </button>
+        </section>
+
+        <section>
+            <h3>Recent Posts</h3>
+            <div class="recent">
+                <img src="campus.jpg" alt="Campus">
+                <span>University of Layyah Admissions</span>
+            </div>
+            <div class="recent">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=180&q=70"
+                     alt="Students">
+                <span>Student Life at UOL</span>
+            </div>
+            <div class="recent">
+                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=180&q=70"
+                     alt="Books">
+                <span>Research and Innovation</span>
+            </div>
+        </section>
+
+    </aside>
+</main>
+
+<!-- Footer -->
+<footer id="contact">
+    <p>University of Layyah | Layyah, Punjab, Pakistan</p>
+    <p>Email: Add the official university email here</p>
+    <p>© 2026 University of Layyah Blog. All rights reserved.</p>
+</footer>
+
+<!-- JavaScript -->
+<script>
+const searchInput = document.getElementById("searchInput");
+const searchForm = document.getElementById("searchForm");
+const posts = [...document.querySelectorAll(".post")];
+const noResults = document.getElementById("noResults");
+const loadMore = document.getElementById("loadMore");
+
+let selectedCategory = "all";
+let visibleLimit = 3;
+
+function filterPosts() {
+    const query = searchInput.value.toLowerCase().trim();
+
+    const matchingPosts = posts.filter(post => {
+        const text = post.innerText.toLowerCase();
+        const categoryMatch =
+            selectedCategory === "all" ||
+            post.dataset.category === selectedCategory;
+
+        return categoryMatch && text.includes(query);
+    });
+
+    posts.forEach(post => {
+        post.hidden =
+            !matchingPosts.includes(post) ||
+            matchingPosts.indexOf(post) >= visibleLimit;
+    });
+
+    noResults.hidden = matchingPosts.length !== 0;
+    loadMore.hidden = matchingPosts.length <= visibleLimit;
+}
+
+searchInput.addEventListener("input", filterPosts);
+
+searchForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    filterPosts();
+});
+
+document.querySelectorAll(".category-link").forEach(button => {
+    button.addEventListener("click", function() {
+        selectedCategory = this.dataset.filter;
+        visibleLimit = 3;
+        filterPosts();
+    });
+});
+
+loadMore.addEventListener("click", function() {
+    visibleLimit += 3;
+    filterPosts();
+});
+
+document.getElementById("themeBtn").addEventListener("click", function(event) {
+    event.preventDefault();
+    document.body.classList.toggle("dark");
+    this.textContent =
+        document.body.classList.contains("dark") ? "☀️" : "🌙";
+});
+
+document.querySelectorAll(".read-more").forEach(button => {
+    button.addEventListener("click", function() {
+        alert(
+            this.dataset.title + "\n\n" +
+            this.dataset.text
+        );
+    });
+});
+
+filterPosts();
+</script>
+
+</body>
+</html>
